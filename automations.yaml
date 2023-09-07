@@ -2951,3 +2951,27 @@
         set result = entities() %} {{ result }}"
   mode: queued
   max: 10
+- id: '1693856668458'
+  alias: Light Salon Scene Dusk When Turn On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.ceiling_salon
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: select.harmony_activities
+      state: gry
+    - condition: state
+      entity_id: select.harmony_activities
+      state: smart
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.light_salon_dusk
+    metadata: {}
+  mode: single
